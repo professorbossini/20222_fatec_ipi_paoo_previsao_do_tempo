@@ -25,6 +25,7 @@ result
 .then(res => {
   for (previsao of res){
     const dt = previsao.dt
+    const feels_like = previsao.main.feels_like
     const temp_min = previsao.main.temp_min
     const temp_max = previsao.main.temp_max
     const humidity = previsao.main.humidity
@@ -34,9 +35,18 @@ result
     console.log(`Temp max: ${temp_max}\u00B0C`)
     console.log(`Humidity: ${humidity}%`)
     console.log(`Description: ${description}`)
+    console.log(`Feels like: ${feels_like}\u00B0C`)
   }
   return res
 })
 .then (res => {
   //mostre quantas previsões têm percepção humana de calor acima de 15 celsius
+  // let cont = 0
+  // for (p of res){
+  //   if (+p.main.feels_like > 15)
+  //     cont++
+  // }
+  // console.log(cont)
+  const r = res.filter(p => +p.main.feels_like > 15)
+  console.log(r.length)
 })
